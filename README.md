@@ -1,4 +1,4 @@
-# tbtc-node
+# bitcoin-docker
 
 Builds a bitcoin `testnet4` full node in a docker container
 

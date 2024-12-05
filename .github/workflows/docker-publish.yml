@@ -45,9 +45,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: Dockerfile.tbtc
+          - dockerfile: Dockerfile.bitcoin-core
             tags: |
-              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/tbtc-node:release
+              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:release
     permissions:
       contents: read
       packages: write

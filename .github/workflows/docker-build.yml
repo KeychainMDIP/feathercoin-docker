@@ -44,7 +44,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: Dockerfile.bitcoin-core
+          - dockerfile: Dockerfile
             tags: |
               ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:${{ needs.generate.outputs.CALVER }}
     steps:

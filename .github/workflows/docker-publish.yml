@@ -11,7 +11,9 @@ name: Build & Publish
 
 on:
   push:
-    branches: ['release']
+    # Pattern matched against refs/tags
+    tags:        
+      - '**'
 
 env:
   REGISTRY: docker.io
@@ -47,7 +49,7 @@ jobs:
         include:
           - dockerfile: Dockerfile
             tags: |
-              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:release
+              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:${{ github.ref_name }}
     permissions:
       contents: read
       packages: write
@@ -70,7 +72,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             ${{ needs.generate.outputs.CALVER }}
-            release
+            ${{ github.ref_name }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@1a162644f9a7e87d8f4b053101d1d9a712edc18c

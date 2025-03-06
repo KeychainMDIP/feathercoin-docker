@@ -1,5 +1,3 @@
-# bitcoin-docker
+# feathercoin-docker
 
-Builds a bitcoin full node in a docker container
-
-That is used pushed to Docker Hub for keychain's Multi Dimensional Identity Protocol (MDIP)
+Builds a Feathercoin full node in a docker container that is  pushed to DockerHub for keychain's Multi Dimensional Identity Protocol (MDIP)

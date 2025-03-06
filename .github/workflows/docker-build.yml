@@ -46,7 +46,7 @@ jobs:
         include:
           - dockerfile: Dockerfile
             tags: |
-              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:${{ needs.generate.outputs.CALVER }}
+              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/feathercoin:${{ needs.generate.outputs.CALVER }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

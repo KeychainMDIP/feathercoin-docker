@@ -49,7 +49,7 @@ jobs:
         include:
           - dockerfile: Dockerfile
             tags: |
-              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/bitcoin-core:${{ github.ref_name }}
+              ${{ needs.generate.outputs.REGISTRY }}/keychainmdip/feathercoin:${{ github.ref_name }}
     permissions:
       contents: read
       packages: write

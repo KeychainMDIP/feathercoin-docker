@@ -9,24 +9,11 @@ RUN \
 RUN git clone --depth 1 --branch v0.19.2 https://github.com/FeatherCoin/Feathercoin.git
 
 WORKDIR /Feathercoin
-RUN make -C depends
 
-RUN for d in \
-        i686-pc-linux-gnu \
-        x86_64-pc-linux-gnu \
-        x86_64-w64-mingw32 \
-        x86_64-apple-darwin14 \
-        arm-linux-gnueabihf \
-        aarch64-linux-gnu \
-        riscv32-linux-gnu \
-        riscv64-linux-gnu \
-    ; do \
-      if [ -d "depends/$d" ]; then \
-        echo "Detected host triplet: $d"; \
-        export DETECTED_HOST="$d"; \
-        break; \
-      fi; \
-    done && \
+COPY detect_arch_build_depends.sh /Feathercoin/detect_arch_build_depends.sh
+RUN chmod +x /Feathercoin/detect_arch_build_depends.sh
+
+RUN . ./detect_arch_build_depends.sh && \
     ./autogen.sh && \
     CONFIG_SITE="$PWD/depends/$DETECTED_HOST/share/config.site" ./configure \
         --prefix=/usr/local \
@@ -34,7 +21,7 @@ RUN for d in \
         --disable-tests \
         --disable-bench
 
-RUN make
+RUN make -j "$(nproc)"
 RUN make install
 RUN strip /usr/local/bin/feathercoin*
 RUN rm -rf /Feathercoin
